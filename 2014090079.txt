@@ -1,0 +1,9 @@
+La apertura del sistema es:
+
+A. El grado en que los nuevos servicios de recursos compartidos se puede agregar y poner a disposición para su uso por una variedad de programas cliente.
+
+B. La propiedad que permite subdividir una aplicación en partes más pequeñas.
+
+C. La ocultación al usuario y al programador de aplicaciones de la separación de los componentes de un sistema distribuido.
+
+D. El abrir el sistema para uso público.
