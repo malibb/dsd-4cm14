@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.Executors;
 
@@ -141,7 +142,7 @@ public class WebServer {
         long startTime = System.nanoTime();
 
         byte[] requestBytes = exchange.getRequestBody().readAllBytes();
-        byte[] responseBytes = calculateResponse(requestBytes);
+        byte[] responseBytes = search(requestBytes);
 
         long finishTime = System.nanoTime();
 
@@ -184,8 +185,8 @@ public class WebServer {
         }
         int contador = 0;
         int indice = 0;
-        if(stringParams[1] != 3){
-            return String.format("La cadena tiene una longitud %s\n", stringParams[1].length).getBytes();   
+        if(stringParams[1].length() != 3){
+            return String.format("La cadena tiene una longitud %s\n", stringParams[1].length()).getBytes();   
         }
         String tokenCadenaABuscar= getASCI(stringParams[1]);
         for(int j = 0; j < n*4; j++){
@@ -202,9 +203,18 @@ public class WebServer {
     }
     
     private String getASCI(String cadena){
-        String ascii = "738078";
-
-        return ascii;
+        StringBuilder asci;
+        int c;
+        if (cadena == ""){
+            asci = new StringBuilder("738078");
+        }else{
+            asci = new StringBuilder();
+            for(int x = 0; x < cadena.length(); x++){
+                c = cadena.codePointAt(x);
+                asci.append(c);
+            }
+        }
+        return asci.toString();
     }
 
     private void handleStatusCheckRequest(HttpExchange exchange) throws IOException {
